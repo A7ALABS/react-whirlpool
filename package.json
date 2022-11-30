@@ -1,7 +1,7 @@
 {
-  "name": "lib",
-  "version": "1.0.0",
-  "description": "",
+  "name": "whirlpool",
+  "version": "0.1.0",
+  "description": "A7A carousel",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
