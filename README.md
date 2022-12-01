@@ -9,12 +9,14 @@
 ## Installing
 `yarn add react-whirlpool`
 
+## Important
+Make sure to import the css file with `import 'react-whirlpool/dist/cjs/component/SimpleCarousel.css'`
+
 ## Usage
 ```
 import React, { useRef, useState } from "react";
-import { SimpleCarousel } from "whirlpool-ts";
-import "./App.css";
-import CarouselItem from "./components/CarouselItem";
+import { SimpleCarousel } from "react-whirlpool";
+import 'react-whirlpool/dist/cjs/component/SimpleCarousel.css' // => important
 
 function App() {
   const [list, setList] = useState(["A", "B", "C", "D", "E", "A"]);
@@ -22,7 +24,7 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="App">
+    <div >
       <SimpleCarousel
         isHorizontal={true}
         gap={20}
