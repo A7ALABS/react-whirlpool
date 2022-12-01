@@ -9,5 +9,5 @@ export default interface ISimpleCarousel {
   hideDevPanel?: boolean
   hideInitGap?: boolean
   onActiveIndexUpdate?: (index: number) => void
-  ref: any
+  ref?: any
 }
