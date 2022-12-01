@@ -1,5 +1,6 @@
 import React, { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import ISimpleCarousel from './types/SimpleCarousel.types'
+import './App.css'
 
 const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
   (

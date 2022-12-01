@@ -1,3 +1,3 @@
-import App from './component/App'
+import SimpleCarousel from './component/SimpleCarousel'
 
-export { App }
+export { SimpleCarousel }

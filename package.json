@@ -1,5 +1,5 @@
 {
-  "name": "whirlpool",
+  "name": "whirlpool-ts",
   "version": "0.1.0",
   "description": "A7A carousel",
   "main": "./dist/cjs/index.js",
