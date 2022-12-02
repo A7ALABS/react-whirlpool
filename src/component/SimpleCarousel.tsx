@@ -138,17 +138,17 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
         )}
         <div className='carousel-options'>
           {!hideArrows && (
-            <p>
+            <div>
               <button className='previous-button' onClick={handlePrev}>
                 Previous
               </button>
               <button className='next-button' onClick={handleNext}>
                 Next
               </button>
-            </p>
+            </div>
           )}
           {!hideDevPanel && (
-            <p>
+            <div>
               Orientation:
               <div onChange={handleRadioChange}>
                 <input type='radio' name='orientation' value='horizontal' defaultChecked />
@@ -156,7 +156,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
                 <input type='radio' name='orientation' value='vertical' />
                 vertical
               </div>
-            </p>
+            </div>
           )}
         </div>
       </div>
