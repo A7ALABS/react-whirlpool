@@ -101,7 +101,12 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     SimpleCarousel.displayName = 'SimpleCarousel'
 
     return (
-      <div>
+      <div
+        style={{
+          height: '100%',
+          width: '100%',
+        }}
+      >
         {isHorizontalState && (
           <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
             {!hideInitGap && <div style={{ width: gap }} />}
