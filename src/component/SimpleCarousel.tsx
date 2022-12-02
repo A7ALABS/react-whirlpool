@@ -25,6 +25,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     const [n, setN] = useState(0) //no of cards displayed in one time
     // const [gapState, setGap] = useState(gap);
     const [dim, setDim] = useState(0)
+    const [touchPosition, setTouchPosition] = useState(null)
 
     useImperativeHandle(ref, () => ({
       handleNextEvent() {
@@ -98,6 +99,31 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
         setIsHorizontal(true)
       }
     }
+    const handleTouchStart = (e: any) => {
+      const touchDown = e.touches[0].clientX
+      setTouchPosition(touchDown)
+      console.log('touchstart')
+    }
+    const handleTouchMove = (e: any) => {
+      const touchDown = touchPosition
+      console.log('touchDown')
+      if (touchDown === null) {
+        return
+      }
+
+      const currentTouch = e.touches[0].clientX
+      const diff = touchDown - currentTouch
+
+      if (diff > 2) {
+        handleNext()
+      }
+
+      if (diff < -2) {
+        handlePrev()
+      }
+
+      setTouchPosition(null)
+    }
     SimpleCarousel.displayName = 'SimpleCarousel'
 
     return (
@@ -112,6 +138,8 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
             {!hideInitGap && <div style={{ width: gap }} />}
             {children.map((Item: any, key) => (
               <div
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
                 style={{
                   transform: `translate(-${left}%)`,
                   // border: selectedIndex === key ? "2px solid black" : "none",
