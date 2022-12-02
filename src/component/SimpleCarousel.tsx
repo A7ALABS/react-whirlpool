@@ -66,6 +66,10 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     }, [autoPlay])
 
     useEffect(() => {
+      setIsHorizontal(isHorizontal)
+    }, [isHorizontal])
+
+    useEffect(() => {
       const x = (100 * gap) / dim
       if (selectedIndex >= children.length - n && selectedIndex < children.length) {
         setLeft((children.length - n) * (100 + x))
@@ -99,7 +103,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     return (
       <div>
         {isHorizontalState && (
-          <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight }}>
+          <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
             {!hideInitGap && <div style={{ width: gap }} />}
             {children.map((Item: any, key) => (
               <div
@@ -117,7 +121,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
           </div>
         )}
         {!isHorizontalState && (
-          <div className='carousel-container-y' ref={containerRef} style={{ minWidth: minWidth }}>
+          <div className='carousel-container-y' ref={containerRef} style={{ minWidth: minWidth, gap: gap }}>
             {!hideInitGap && <div style={{ height: gap }} />}
             {children.map((Item, key) => (
               <div
