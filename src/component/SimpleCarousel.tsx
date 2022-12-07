@@ -39,66 +39,66 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     // const [windowWidth, setWindowWidth] = useState(0);
     // const [windowHeight, setWindowHeight] = useState(0);
 
-    let resizeWindow = () => {
+    const resizeWindow = () => {
       // setWindowWidth(window.innerWidth);
       // setWindowHeight(window.innerHeight);
-      recalculate();
-    };
-  
-      useEffect(() => {
-        resizeWindow();
-        window.addEventListener("resize", resizeWindow);
-        return () => window.removeEventListener("resize", resizeWindow);
-      }, []);
-  
-      useEffect(() => {
-        let interval: any;
-        if (autoPlay) {
-          interval = setInterval(() => {
-            setSelectedIndex((s) => s + 1)
-          }, 3000)
-        } else {
-          clearInterval(interval)
-        }
-        return () => {
-          clearInterval(interval)
-        }
-      }, [autoPlay])
-  
-      useEffect(() => {
-        setIsHorizontal(isHorizontal)
-      }, [isHorizontal])
-  
-      useEffect(() => {
-        const x = (100 * gap) / dim
-        if (selectedIndex >= children.length - n && selectedIndex < children.length) {
-          setLeft((children.length - n) * (100 + x))
-        } else if (selectedIndex === children.length) {
-          setSelectedIndex(0)
-        } else if (selectedIndex === -1) {
-          setSelectedIndex(children.length - 1)
-        } else {
-          setLeft(selectedIndex * (100 + x))
-        }
-        onActiveIndexUpdate && onActiveIndexUpdate(selectedIndex)
-      }, [selectedIndex, n])
+      recalculate()
+    }
 
-      const recalculate = () => {
-        if (containerRef.current && itemRef.current) {
-          if (isHorizontal) {
-            const width = containerRef.current.offsetWidth
-            const itemWidth = itemRef.current.offsetWidth
-            setDim(itemWidth)
-            setN(Math.floor(width / (itemWidth + gap)))
-          } else {
-            const height = containerRef.current.offsetHeight
-            const itemHeight = itemRef.current.offsetHeight
-            setDim(itemHeight)
-            setN(Math.floor(height / (itemHeight + gap)))
-          }
+    useEffect(() => {
+      resizeWindow()
+      window.addEventListener('resize', resizeWindow)
+      return () => window.removeEventListener('resize', resizeWindow)
+    }, [])
+
+    useEffect(() => {
+      let interval: any
+      if (autoPlay) {
+        interval = setInterval(() => {
+          setSelectedIndex((s) => s + 1)
+        }, 3000)
+      } else {
+        clearInterval(interval)
+      }
+      return () => {
+        clearInterval(interval)
+      }
+    }, [autoPlay])
+
+    useEffect(() => {
+      setIsHorizontal(isHorizontal)
+    }, [isHorizontal])
+
+    useEffect(() => {
+      const x = (100 * gap) / dim
+      if (selectedIndex >= children.length - n && selectedIndex < children.length) {
+        setLeft((children.length - n) * (100 + x))
+      } else if (selectedIndex === children.length) {
+        setSelectedIndex(0)
+      } else if (selectedIndex === -1) {
+        setSelectedIndex(children.length - 1)
+      } else {
+        setLeft(selectedIndex * (100 + x))
+      }
+      onActiveIndexUpdate && onActiveIndexUpdate(selectedIndex)
+    }, [selectedIndex, n])
+
+    const recalculate = () => {
+      if (containerRef.current && itemRef.current) {
+        if (isHorizontal) {
+          const width = containerRef.current.offsetWidth
+          const itemWidth = itemRef.current.offsetWidth
+          setDim(itemWidth)
+          setN(Math.floor(width / (itemWidth + gap)))
+        } else {
+          const height = containerRef.current.offsetHeight
+          const itemHeight = itemRef.current.offsetHeight
+          setDim(itemHeight)
+          setN(Math.floor(height / (itemHeight + gap)))
         }
       }
-  
+    }
+
     const handleNext = () => {
       setSelectedIndex((s) => s + 1)
     }
