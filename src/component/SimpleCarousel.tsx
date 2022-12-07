@@ -36,8 +36,8 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
       },
     }))
 
-    const [windowWidth, setWindowWidth] = useState(0);
-    const [windowHeight, setWindowHeight] = useState(0);
+    // const [windowWidth, setWindowWidth] = useState(0);
+    // const [windowHeight, setWindowHeight] = useState(0);
 
     let resizeWindow = () => {
       // setWindowWidth(window.innerWidth);
