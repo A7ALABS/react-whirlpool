@@ -83,18 +83,26 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
       onActiveIndexUpdate && onActiveIndexUpdate(selectedIndex)
     }, [selectedIndex, n])
 
-    const recalculate = () => {
-      if (containerRef.current && itemRef.current) {
+    useEffect(() => {
+      if (containerRef.current) {
         if (isHorizontal) {
           const width = containerRef.current.offsetWidth
-          const itemWidth = itemRef.current.offsetWidth
-          setDim(itemWidth)
-          setN(Math.floor(width / (itemWidth + gap)))
+          setN(Math.floor(width / (dim + gap)))
         } else {
           const height = containerRef.current.offsetHeight
+          setN(Math.floor(height / (dim + gap)))
+        }
+      }
+    }, [dim])
+
+    const recalculate = () => {
+      if (itemRef.current) {
+        if (isHorizontal) {
+          const itemWidth = itemRef.current.offsetWidth
+          setDim(itemWidth)
+        } else {
           const itemHeight = itemRef.current.offsetHeight
           setDim(itemHeight)
-          setN(Math.floor(height / (itemHeight + gap)))
         }
       }
     }
@@ -142,48 +150,50 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     SimpleCarousel.displayName = 'SimpleCarousel'
 
     return (
-      <div
-        style={{
-          height: '100%',
-          width: '100%',
-        }}
-      >
-        {isHorizontalState && (
-          <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
-            {!hideInitGap && <div style={{ width: gap }} />}
-            {children.map((Item: any, key) => (
-              <div
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                style={{
-                  transform: `translate(-${left}%)`,
-                  // border: selectedIndex === key ? "2px solid black" : "none",
-                  borderRadius: 10,
-                }}
-                ref={itemRef}
-                key={key}
-              >
-                {Item}
-              </div>
-            ))}
-          </div>
-        )}
-        {!isHorizontalState && (
-          <div className='carousel-container-y' ref={containerRef} style={{ minWidth: minWidth, gap: gap }}>
-            {!hideInitGap && <div style={{ height: gap }} />}
-            {children.map((Item, key) => (
-              <div
-                style={{
-                  transform: `translateY(-${left}%)`,
-                }}
-                ref={itemRef}
-                key={key}
-              >
-                {Item}
-              </div>
-            ))}
-          </div>
-        )}
+      <>
+        <div
+          style={{
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          {isHorizontalState && (
+            <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
+              {!hideInitGap && <div style={{ width: gap }} />}
+              {children.map((Item: any, key) => (
+                <div
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  style={{
+                    transform: `translate(-${left}%)`,
+                    // border: selectedIndex === key ? "2px solid black" : "none",
+                    borderRadius: 10,
+                  }}
+                  ref={itemRef}
+                  key={key}
+                >
+                  {Item}
+                </div>
+              ))}
+            </div>
+          )}
+          {!isHorizontalState && (
+            <div className='carousel-container-y' ref={containerRef} style={{ minWidth: minWidth, gap: gap }}>
+              {!hideInitGap && <div style={{ height: gap }} />}
+              {children.map((Item, key) => (
+                <div
+                  style={{
+                    transform: `translateY(-${left}%)`,
+                  }}
+                  ref={itemRef}
+                  key={key}
+                >
+                  {Item}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         <div className='carousel-options'>
           {!hideArrows && (
             <div>
@@ -207,7 +217,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
             </div>
           )}
         </div>
-      </div>
+      </>
     )
   },
 )
