@@ -1,7 +1,6 @@
 # React Whirlpool Carousel 
 
-<video src="" controls="controls" style="max-width: 730px;"></video>
-![VIDEO](https://github.com/A7ALABS/react-whirlpool/raw/main/carousel-recording.mp4)
+https://github.com/A7ALABS/react-whirlpool/assets/60537632/0e27a034-7582-431d-95b3-263f224c9048
 
 **Features**
 * Responsive
