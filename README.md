@@ -1,6 +1,6 @@
 # React Whirlpool Carousel 
 
-![Video](https://cdn.discordapp.com/attachments/1020038341376360539/1163376763095752784/carousel-recording.mp4)
+![Video]([https://cdn.discordapp.com/attachments/1020038341376360539/1163376763095752784/carousel-recording.mp4](https://cdn.discordapp.com/attachments/1020038341376360539/1163376763095752784/carousel-recording.mp4?ex=653f5a0a&is=652ce50a&hm=24057053538295200bad27b3ba1b41f2d47e0fcbbec548e069746d4326284b65&))
 
 **Features**
 * Responsive
