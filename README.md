@@ -1,5 +1,7 @@
 # React Whirlpool Carousel 
 
+![Video](https://cdn.discordapp.com/attachments/1020038341376360539/1163376763095752784/carousel-recording.mp4)
+
 **Features**
 * Responsive
 * Customize previous and next buttons
