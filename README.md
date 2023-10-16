@@ -1,6 +1,6 @@
 # React Whirlpool Carousel 
 
-![Video](https://cdn.discordapp.com/attachments/1020038341376360539/1163376763095752784/carousel-recording.mp4)
+![Video](https://github.com/A7ALABS/react-whirlpool/blob/main/carousel-recording.mp4)
 
 **Features**
 * Responsive
