@@ -2,6 +2,10 @@
 
 https://github.com/A7ALABS/react-whirlpool/assets/60537632/0e27a034-7582-431d-95b3-263f224c9048
 
+
+https://github.com/A7ALABS/react-whirlpool/assets/60537632/d5f3ba93-56ca-4ff5-8467-dc10b4f72be2
+
+
 **Features**
 * Responsive
 * Customize previous and next buttons
