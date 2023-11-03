@@ -25,7 +25,7 @@ import { SimpleCarousel } from "react-whirlpool";
 import 'react-whirlpool/dist/cjs/component/SimpleCarousel.css' // => important
 
 function App() {
-  const [list, setList] = useState(["A", "B", "C", "D", "E", "A"]);
+  const [list, setList] = useState(["A", "B", "C", "D", "E"]);
   const simpleCarouselRef = useRef<any>();
   const [activeIndex, setActiveIndex] = useState(0);
 
