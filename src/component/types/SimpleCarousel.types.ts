@@ -8,6 +8,7 @@ export default interface ISimpleCarousel {
   hideArrows?: boolean
   hideDevPanel?: boolean
   hideInitGap?: boolean
+  autoPlayInterval?: number
   onActiveIndexUpdate?: (index: number) => void
   ref?: any
 }

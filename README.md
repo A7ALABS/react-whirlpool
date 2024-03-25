@@ -80,6 +80,7 @@ export default App;
 |minWidth           | string, optional  | Define the minimum width of the carousel container  |
 |onActiveIndexUpdate| function, optional | Takes an active index (number) as argument to update selected index in SimpleCarousel |
 | autoplay          | boolean, default false, optional  | Enable auto rotation of carousel, rotation interval is set to 3000ms    |
+| autoPlayInterval  | number, default 3000, optional   | Auto-play interval in milliseconds
  hideArrows         | boolean, default true, optional  | Hide default arrows    |
  hideDevPanel       | boolean, default true, optional | Hide dev panel  |
  hideInitGap        | boolean, default true, optional | Hide initial gap between the first card and carousel container  |

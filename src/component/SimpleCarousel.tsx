@@ -14,6 +14,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
       hideArrows = true,
       hideDevPanel = true,
       hideInitGap = true,
+      autoPlayInterval = 3000
     }: ISimpleCarousel,
     ref,
   ) => {
@@ -59,7 +60,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
       if (autoPlay) {
         interval = setInterval(() => {
           setSelectedIndex((s) => s + 1)
-        }, 3000)
+        }, autoPlayInterval)
       } else {
         clearInterval(interval)
       }
@@ -197,29 +198,31 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
             </div>
           )}
         </div>
-        <div className='carousel-options'>
-          {!hideArrows && (
-            <div>
-              <button className='previous-button' onClick={handlePrev}>
-                Previous
-              </button>
-              <button className='next-button' onClick={handleNext}>
-                Next
-              </button>
-            </div>
-          )}
-          {!hideDevPanel && (
-            <div>
-              Orientation:
-              <div onChange={handleRadioChange}>
-                <input type='radio' name='orientation' value='horizontal' defaultChecked />
-                horizontal
-                <input type='radio' name='orientation' value='vertical' />
-                vertical
+        {!(hideArrows && hideDevPanel) && (
+          <div className='carousel-options'>
+            {!hideArrows && (
+              <div>
+                <button className='previous-button' onClick={handlePrev}>
+                  Previous
+                </button>
+                <button className='next-button' onClick={handleNext}>
+                  Next
+                </button>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+            {!hideDevPanel && (
+              <div>
+                Orientation:
+                <div onChange={handleRadioChange}>
+                  <input type='radio' name='orientation' value='horizontal' defaultChecked />
+                  horizontal
+                  <input type='radio' name='orientation' value='vertical' />
+                  vertical
+                </div>
+              </div>
+            )}
+          </div>
+        )}
       </>
     )
   },
