@@ -34,6 +34,9 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
       handlePrevEvent() {
         setSelectedIndex((s) => s - 1)
       },
+      handleReset() {
+        setSelectedIndex(0)
+      },
     }))
 
     // const [windowWidth, setWindowWidth] = useState(0);
