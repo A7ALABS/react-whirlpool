@@ -1,10 +1,10 @@
-import React, { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import ISimpleCarousel from './types/SimpleCarousel.types'
+import React, { Children, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import ISimpleCarousel, { SimpleCarouselHandle } from './types/SimpleCarousel.types'
 
-const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
+const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
   (
     {
-      children,
+      children: childrenProp,
       isHorizontal,
       gap,
       minHeight,
@@ -18,6 +18,8 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     }: ISimpleCarousel,
     ref,
   ) => {
+    // Normalise to an array so a single child (or a conditional/null child) does not crash .map/.length
+    const children = Children.toArray(childrenProp)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [isHorizontalState, setIsHorizontal] = useState(isHorizontal)
     const containerRef = useRef<any>()
@@ -151,8 +153,6 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
 
       setTouchPosition(null)
     }
-    SimpleCarousel.displayName = 'SimpleCarousel'
-
     return (
       <>
         <div
@@ -164,7 +164,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
           {isHorizontalState && (
             <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
               {!hideInitGap && <div style={{ width: gap }} />}
-              {children.map((Item: any, key) => (
+              {children.map((Item, key) => (
                 <div
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
@@ -227,4 +227,6 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     )
   },
 )
+SimpleCarousel.displayName = 'SimpleCarousel'
+
 export default SimpleCarousel
