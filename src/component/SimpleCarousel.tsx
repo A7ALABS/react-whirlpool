@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import React, { Children, forwardRef, isValidElement, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import ISimpleCarousel, { SimpleCarouselHandle } from './types/SimpleCarousel.types'
 
 const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
@@ -20,6 +20,10 @@ const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
   ) => {
     // Normalise to an array so a single child (or a conditional/null child) does not crash .map/.length
     const children = Children.toArray(childrenProp)
+    // toArray assigns stable keys (the child's own key, or its original position), so slides keep their state when
+    // a sibling is added or removed. Strings/numbers have no key, so fall back to the index for those.
+    const slideKey = (child: ReturnType<typeof Children.toArray>[number], index: number) =>
+      isValidElement(child) && child.key !== null ? child.key : index
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [isHorizontalState, setIsHorizontal] = useState(isHorizontal)
     const containerRef = useRef<any>()
@@ -174,7 +178,7 @@ const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
                     borderRadius: 10,
                   }}
                   ref={itemRef}
-                  key={key}
+                  key={slideKey(Item, key)}
                 >
                   {Item}
                 </div>
@@ -190,7 +194,7 @@ const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
                     transform: `translateY(-${left}%)`,
                   }}
                   ref={itemRef}
-                  key={key}
+                  key={slideKey(Item, key)}
                 >
                   {Item}
                 </div>
