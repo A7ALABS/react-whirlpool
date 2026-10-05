@@ -1,0 +1,6 @@
+{
+  "strictness": 2,
+  "commentTypes": ["syntax", "logic", "style"],
+  "ignorePatterns": "yarn.lock\ndist/**",
+  "instructions": "react-whirlpool is a published npm package (a React carousel component). Prioritise anything that could break consumers on upgrade: runtime crashes, changes to the public props or ref API, emitted types in dist/*.d.ts, and global CSS side effects. Flag breaking changes explicitly and say whether they need a minor or major version bump."
+}

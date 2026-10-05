@@ -1,0 +1,12 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "description": "Public documentation: props table, ref methods and usage example that consumers rely on. Should stay in sync with the props and ref API."
+    },
+    {
+      "path": "package.json",
+      "description": "Published entry points (main/module/types), files whitelist, peerDependencies and build scripts."
+    }
+  ]
+}
