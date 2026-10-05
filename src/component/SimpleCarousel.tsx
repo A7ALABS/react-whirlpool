@@ -56,31 +56,34 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     }, [])
 
     useEffect(() => {
-      let interval: any
-      if (autoPlay) {
-        interval = setInterval(() => {
-          setSelectedIndex((s) => s + 1)
-        }, autoPlayInterval)
-      } else {
-        clearInterval(interval)
+      if (!autoPlay) {
+        return
       }
+      const interval = setInterval(() => {
+        setSelectedIndex((s) => s + 1)
+      }, autoPlayInterval)
       return () => {
         clearInterval(interval)
       }
-    }, [autoPlay])
+    }, [autoPlay, autoPlayInterval])
 
     useEffect(() => {
       setIsHorizontal(isHorizontal)
     }, [isHorizontal])
 
     useEffect(() => {
-      const x = (100 * gap) / dim
-      if (selectedIndex >= children.length - n && selectedIndex < children.length) {
-        setLeft((children.length - n) * (100 + x))
-      } else if (selectedIndex === children.length) {
+      // Wrap around before reporting, so onActiveIndexUpdate never sees -1 or children.length
+      if (selectedIndex >= children.length) {
         setSelectedIndex(0)
-      } else if (selectedIndex === -1) {
+        return
+      }
+      if (selectedIndex < 0) {
         setSelectedIndex(children.length - 1)
+        return
+      }
+      const x = (100 * gap) / dim
+      if (selectedIndex >= children.length - n) {
+        setLeft((children.length - n) * (100 + x))
       } else {
         setLeft(selectedIndex * (100 + x))
       }
