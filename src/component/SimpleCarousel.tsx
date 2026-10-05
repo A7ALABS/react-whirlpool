@@ -1,10 +1,10 @@
-import React, { FC, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import ISimpleCarousel from './types/SimpleCarousel.types'
+import React, { Children, forwardRef, isValidElement, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import ISimpleCarousel, { SimpleCarouselHandle } from './types/SimpleCarousel.types'
 
-const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
+const SimpleCarousel = forwardRef<SimpleCarouselHandle, ISimpleCarousel>(
   (
     {
-      children,
+      children: childrenProp,
       isHorizontal,
       gap,
       minHeight,
@@ -18,6 +18,12 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     }: ISimpleCarousel,
     ref,
   ) => {
+    // Normalise to an array so a single child (or a conditional/null child) does not crash .map/.length
+    const children = Children.toArray(childrenProp)
+    // toArray assigns stable keys (the child's own key, or its original position), so slides keep their state when
+    // a sibling is added or removed. Strings/numbers have no key, so fall back to the index for those.
+    const slideKey = (child: ReturnType<typeof Children.toArray>[number], index: number) =>
+      isValidElement(child) && child.key !== null ? child.key : index
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [isHorizontalState, setIsHorizontal] = useState(isHorizontal)
     const containerRef = useRef<any>()
@@ -151,8 +157,6 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
 
       setTouchPosition(null)
     }
-    SimpleCarousel.displayName = 'SimpleCarousel'
-
     return (
       <>
         <div
@@ -164,7 +168,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
           {isHorizontalState && (
             <div className='carousel-container-x' ref={containerRef} style={{ minHeight: minHeight, gap: gap }}>
               {!hideInitGap && <div style={{ width: gap }} />}
-              {children.map((Item: any, key) => (
+              {children.map((Item, key) => (
                 <div
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
@@ -174,7 +178,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
                     borderRadius: 10,
                   }}
                   ref={itemRef}
-                  key={key}
+                  key={slideKey(Item, key)}
                 >
                   {Item}
                 </div>
@@ -190,7 +194,7 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
                     transform: `translateY(-${left}%)`,
                   }}
                   ref={itemRef}
-                  key={key}
+                  key={slideKey(Item, key)}
                 >
                   {Item}
                 </div>
@@ -227,4 +231,6 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     )
   },
 )
+SimpleCarousel.displayName = 'SimpleCarousel'
+
 export default SimpleCarousel

@@ -1,5 +1,7 @@
+import { ReactNode } from 'react'
+
 export default interface ISimpleCarousel {
-  children: JSX.Element[]
+  children: ReactNode
   isHorizontal: boolean
   gap: number
   autoPlay?: boolean
@@ -10,5 +12,10 @@ export default interface ISimpleCarousel {
   hideInitGap?: boolean
   autoPlayInterval?: number
   onActiveIndexUpdate?: (index: number) => void
-  ref?: any
+}
+
+export interface SimpleCarouselHandle {
+  handleNextEvent: () => void
+  handlePrevEvent: () => void
+  handleReset: () => void
 }
