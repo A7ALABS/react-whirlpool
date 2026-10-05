@@ -129,11 +129,9 @@ const SimpleCarousel: FC<ISimpleCarousel> = forwardRef(
     const handleTouchStart = (e: any) => {
       const touchDown = e.touches[0].clientX
       setTouchPosition(touchDown)
-      console.log('touchstart')
     }
     const handleTouchMove = (e: any) => {
       const touchDown = touchPosition
-      console.log('touchDown')
       if (touchDown === null) {
         return
       }
